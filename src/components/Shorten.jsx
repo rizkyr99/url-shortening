@@ -1,21 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { LinkContext } from '../contexts/LinkContext';
+import validator from 'validator';
+import isURL from 'validator/lib/isURL';
 
 const Shorten = () => {
-  const [link, setLink] = useState('');
+  const [input, setInput] = useState('');
   const [error, setError] = useState('');
 
-  const shortenIt = () => {};
+  const { dispatch } = useContext(LinkContext);
+
+  const shortenIt = () => {
+    if (input !== '' && validator.isURL(input)) {
+      axios
+        .get(`https://api.shrtco.de/v2/shorten`, {
+          params: {
+            url: input,
+          },
+        })
+        .then((res) => {
+          dispatch({
+            type: 'ADD_LINK',
+            link: {
+              link: res.data.result.original_link,
+              shortLink: res.data.result.short_link,
+            },
+          });
+        });
+    } else {
+      setError('Please add a valid URL');
+    }
+  };
+
   return (
     <div className='shorten container'>
       <div className='shorten__input'>
         <input
           type='text'
           placeholder='Shorten a link here'
-          value={link}
-          className='error'
-          onChange={(e) => setLink(e.target.value)}
+          value={input}
+          className={`${error && 'error'}`}
+          onChange={(e) => setInput(e.target.value)}
         />
-        <p className='shorten__error'>Error</p>
+        {error && <p className='shorten__error'>{error}</p>}
       </div>
       <button className='shorten__button button-cyan' onClick={shortenIt}>
         Shorten It!
