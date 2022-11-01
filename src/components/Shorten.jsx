@@ -12,6 +12,7 @@ const Shorten = () => {
 
   const shortenIt = () => {
     if (input !== '' && validator.isURL(input)) {
+      setError('');
       axios
         .get(`https://api.shrtco.de/v2/shorten`, {
           params: {
