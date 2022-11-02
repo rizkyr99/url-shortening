@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import './App.scss';
 import Footer from './components/Footer';
 import FooterBanner from './components/FooterBanner';
@@ -7,12 +8,12 @@ import Shorten from './components/Shorten';
 import ShortenList from './components/ShortenList';
 import Statistics from './components/Statistics';
 import LinkContextProvider from './contexts/LinkContext';
-import logo from './images/logo.svg';
 
 function App() {
   return (
     <div>
       <LinkContextProvider>
+        <Toaster />
         <header>
           <Navbar />
         </header>

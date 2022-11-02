@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { LinkContext } from '../contexts/LinkContext';
+import { toast } from 'react-hot-toast';
 
 const ShortenList = () => {
   const { links } = useContext(LinkContext);
-  const storage = JSON.parse(localStorage.getItem('links'));
-  // setLinks(storage);
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
+    toast.success('Link copied to clipboard', { position: 'bottom-center' });
   };
   return (
     <div className='list container'>
@@ -16,7 +16,11 @@ const ShortenList = () => {
           <p>{item.link}</p>
 
           <div className='list__item-right'>
-            <a href='' className='list__item-link'>
+            <a
+              href={`https://${item.shortLink}`}
+              target='_blank'
+              rel='noreferrer'
+              className='list__item-link'>
               {item.shortLink}
             </a>
             <button

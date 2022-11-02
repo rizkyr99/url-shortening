@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { LinkContext } from '../contexts/LinkContext';
 import validator from 'validator';
-import isURL from 'validator/lib/isURL';
 
 const Shorten = () => {
   const [input, setInput] = useState('');

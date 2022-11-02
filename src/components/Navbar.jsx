@@ -10,13 +10,13 @@ const Navbar = () => {
         <img src={logo} alt='' />
         <div className={`navbar__menu ${mobileMenu && 'show-mobile-menu'}`}>
           <div className='navbar__links'>
-            <a href='' className='navbar__link'>
+            <a href='#' className='navbar__link'>
               Features
             </a>
-            <a href='' className='navbar__link'>
+            <a href='#' className='navbar__link'>
               Pricing
             </a>
-            <a href='' className='navbar__link'>
+            <a href='#' className='navbar__link'>
               Resources
             </a>
           </div>
